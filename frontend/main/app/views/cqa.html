@@ -22,6 +22,8 @@
         <div class="col-sm-5">
             <label>Customer</label>
             <ng-selectize the-model="baseEntity.CustomerKey" service="CustomerService" label-field="Value" value-field="id" allow-create="false"></ng-selectize>
+            <label>FS Customer</label>
+            <ng-selectize the-model="baseEntity.FSCustomerKey" service="FSCustomerService" label-field="Value" value-field="id" allow-create="false"></ng-selectize>
         </div>
         <div class="col-sm-5">
             <label>Notification Date</label>

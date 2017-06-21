@@ -80,6 +80,7 @@ namespace ReusableWebAPI.App_Start
             kernel.Bind<ICatStatusLogic>().To<catStatusLogic>();
             kernel.Bind<ICatResultLogic>().To<catResultLogic>();
             kernel.Bind<ICatConcernTypeLogic>().To<catConcernTypeLogic>();
+            kernel.Bind<ICatCustomerLogic>().To<catCustomerLogic>();
 
             kernel.Bind<IFSCustomerLogic>().To<FSCustomerLogic>();//.WithConstructorArgument("context", ctx => ctx.Kernel.Get<FSContext>());
             kernel.Bind<IFSItemLogic>().To<FSItemLogic>();//.WithConstructorArgument("context", ctx => ctx.Kernel.Get<FSContext>());

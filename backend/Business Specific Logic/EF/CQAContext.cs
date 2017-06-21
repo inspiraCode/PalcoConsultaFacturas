@@ -21,6 +21,7 @@ namespace BusinessSpecificLogic.EF
         public virtual DbSet<cat_ProductLine> cat_ProductLine { get; set; }
         public virtual DbSet<cat_Result> cat_Result { get; set; }
         public virtual DbSet<cat_Status> cat_Status { get; set; }
+        public virtual DbSet<cat_Customer> cat_Customer { get; set; }
         public virtual DbSet<CQAHeader> CQAHeaders { get; set; }
         public virtual DbSet<CQALine> CQALines { get; set; }
         public virtual DbSet<CQANumber> CQANumbers { get; set; }
@@ -33,7 +34,7 @@ namespace BusinessSpecificLogic.EF
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CQAHeader>()
-                .Property(e => e.ConcertDescription)
+                .Property(e => e.ConcernDescription)
                 .IsUnicode(false);
 
             modelBuilder.Entity<CQALine>()

@@ -19,6 +19,8 @@ namespace BusinessSpecificLogic.EF
         [Key]
         public int CQAHeaderKey { get; set; }
 
+        public int? FSCustomerKey { get; set; }
+
         public int? CustomerKey { get; set; }
 
         public int CQANumberKey { get; set; }
@@ -33,7 +35,7 @@ namespace BusinessSpecificLogic.EF
 
         public int? ConcernTypeKey { get; set; }
 
-        public string ConcertDescription { get; set; }
+        public string ConcernDescription { get; set; }
 
         public DateTime? FirstResponseDate { get; set; }
 
@@ -52,8 +54,11 @@ namespace BusinessSpecificLogic.EF
 
         public virtual cat_Status cat_Status { get; set; }
 
-        public virtual CQANumber CQANumber { get; set; }
+        [ForeignKey("CustomerKey")]
+        public virtual cat_Customer cat_Customer { get; set; }
 
+        public virtual CQANumber CQANumber { get; set; }
+        
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CQALine> CQALines { get; set; }
     }

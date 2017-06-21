@@ -17,7 +17,7 @@ namespace BusinessSpecificLogic.EF
         public string CustomerNumber { get; set; }
 
         [NotMapped]
-        public FSCustomer Customer { get; set; }
+        public FSCustomer FSCustomer { get; set; }
 
         [NotMapped]
         public FSItem FSItem { get; set; }
@@ -36,6 +36,9 @@ namespace BusinessSpecificLogic.EF
 
         [NotMapped]
         public string StatusValue { get; set; }
+
+        [NotMapped]
+        public string FSCustomerValue { get; set; }
 
         [NotMapped]
         public string CustomerValue { get; set; }

@@ -17,21 +17,24 @@ namespace BusinessSpecificLogic.Logic
 
     public class CQAHeaderLogic : BaseLogic<CQAHeader>, ICQAHeaderLogic
     {
-        private readonly FSReadOnlyRepository<FSCustomer> customerRepository;
+        private readonly FSReadOnlyRepository<FSCustomer> fs_customerRepository;
         private readonly FSReadOnlyRepository<FSItem> itemRepository;
         private readonly Repository<User> userRepository;
         private readonly Repository<cat_Status> statusRepository;
+        private readonly Repository<cat_Customer> customerRepository;
 
         public CQAHeaderLogic(DbContext context, IRepository<CQAHeader> repository,
-            FSReadOnlyRepository<FSCustomer> customerRepository,
+            FSReadOnlyRepository<FSCustomer> fs_customerRepository,
             FSReadOnlyRepository<FSItem> itemRepository,
             Repository<User> userRepository,
-            Repository<cat_Status> statusRepository) : base(context, repository)
+            Repository<cat_Status> statusRepository,
+            Repository<cat_Customer> customerRepository) : base(context, repository)
         {
-            this.customerRepository = customerRepository;
+            this.fs_customerRepository = fs_customerRepository;
             this.itemRepository = itemRepository;
             this.userRepository = userRepository;
             this.statusRepository = statusRepository;
+            this.customerRepository = customerRepository;
         }
 
         protected override void loadNavigationProperties(params CQAHeader[] entities)
@@ -39,8 +42,8 @@ namespace BusinessSpecificLogic.Logic
             var ctx = context as CQAContext;
             foreach (var item in entities)
             {
-                item.Customer = customerRepository.GetByID(item.CustomerKey ?? -1);
-                item.CustomerValue = item.Customer != null ? item.Customer.Value : "";
+                item.FSCustomer = fs_customerRepository.GetByID(item.CustomerKey ?? -1);
+                item.FSCustomerValue = item.FSCustomer != null ? item.FSCustomer.Value : "";
                 item.FSItem = itemRepository.GetByID(item.PartNumberKey ?? -1);
                 if (item.FSItem != null)
                 {
@@ -52,9 +55,11 @@ namespace BusinessSpecificLogic.Logic
                 var concern = ctx.cat_ConcernType.Where(e => e.ConcernTypeKey == item.ConcernTypeKey).FirstOrDefault();
                 var result = ctx.cat_Result.Where(e => e.ResultKey == item.ResultKey).FirstOrDefault();
                 var status = ctx.cat_Status.Where(e => e.StatusKey== item.StatusKey).FirstOrDefault();
-                item.ConcernValue = concern != null ? concern.Value + " - " + item.ConcertDescription : item.ConcertDescription;
+                var customer = ctx.cat_Customer.Where(e => e.CustomerKey == item.CustomerKey).FirstOrDefault();
+                item.ConcernValue = concern != null ? concern.Value + " - " + item.ConcernDescription : item.ConcernDescription;
                 item.ResultValue = result != null ? result.Value : "";
                 item.StatusValue = status != null ? status.Value : "";
+                item.CustomerValue = customer != null ? customer.Value : "";
                 item.CQANumberValue = item.CQANumber.GeneratedNumber;  
             }
         }
@@ -123,6 +128,7 @@ namespace BusinessSpecificLogic.Logic
         {
             return new Catalogs()
             {
+                FSCustomer = fs_customerRepository.GetAll(),
                 Customer = customerRepository.GetAll(),
                 User = userRepository.GetAll(),
                 Status = statusRepository.GetAll()
@@ -131,7 +137,8 @@ namespace BusinessSpecificLogic.Logic
 
         private class Catalogs : ICatalogContainer
         {
-            public IList<FSCustomer> Customer { get; set; }
+            public IList<FSCustomer> FSCustomer { get; set; }
+            public IList<cat_Customer> Customer { get; set; }
             public IList<User> User { get; set; }
             public IList<cat_Status> Status { get; set; }
         }
