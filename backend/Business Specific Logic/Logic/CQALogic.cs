@@ -42,7 +42,7 @@ namespace BusinessSpecificLogic.Logic
             var ctx = context as CQAContext;
             foreach (var item in entities)
             {
-                item.FSCustomer = fs_customerRepository.GetByID(item.CustomerKey ?? -1);
+                item.FSCustomer = fs_customerRepository.GetByID(item.FSCustomerKey ?? -1);
                 item.FSCustomerValue = item.FSCustomer != null ? item.FSCustomer.Value : "";
                 item.FSItem = itemRepository.GetByID(item.PartNumberKey ?? -1);
                 if (item.FSItem != null)

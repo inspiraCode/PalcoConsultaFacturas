@@ -61,6 +61,11 @@ angular.module('appApp', [
           controller: 'EmailaccountCtrl',
           controllerAs: 'emailAccount'
         })
+        .when('/customers', {
+          templateUrl: 'views/customers.html',
+          controller: 'CustomersCtrl',
+          controllerAs: 'customers'
+        })
         .otherwise({
             redirectTo: '/CQAList'
         });

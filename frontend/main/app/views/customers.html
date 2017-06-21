@@ -1,0 +1,62 @@
+<h2>{{screenTitle}}</h2>
+<div class="form-group text-left" ng-if="mode == 'select'">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search" ng-model="filterOptions.filterGeneral" ng-model-options="{debounce: 200}" ng-change="refresh()">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="filterOptions.filterGeneral = '';refresh();"><span class="glyphicon glyphicon-remove"></span></button>
+        </span>
+    </div>
+</div>
+<div ng-style="{visibility: isLoading ? 'hidden' : 'inherited'}">
+    <div class="text-right" style="min-height: 30px;">
+        <dir-pagination-controls pagination-id="customers_id" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-condensed table-striped table-hover">
+            <thead>
+                <tr>
+                    <th style="text-align:center;width:100px;"></th>
+                    <th style="text-align: left;">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr pagination-id="customers_id" dir-paginate="item in baseList | itemsPerPage: filterOptions.perPage track by item.id" total-items="filterOptions.itemsCount" current-page="filterOptions.page">
+                    <td style="text-align:center;">
+                        <span ng-if="mode != 'select'" class="btn btn-sm glyphicon glyphicon-remove" aria-hidden="true" ng-click="removeItem(item);"></span>
+                        <span ng-if="mode != 'select'" class="btn btn-sm glyphicon glyphicon-pencil" aria-hidden="true" ng-click="openItem(item);"></span>
+                    </td>
+                    <td style="text-align:left;">{{item.Value}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header" style="width:100%;">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-list">
+                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+            </button>
+            <p class="navbar-brand form-control-static">{{::screenTitle}}</p>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" ng-model-options="{debounce: 200}" class="text-center form-control" placeholder="Buscar" ng-change="refresh();" ng-model="filterOptions.filterGeneral" style="max-width:180px;">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-default" ng-click="clearFilters();refresh();" style="padding: 4px 8px;">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+            </form>
+            <p class="navbar-text navbar-left">{{filterLabel}}</p>
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <button type="button" class="btn btn-default btn-sm" ng-click="create();">New</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<modal title="Customer" modal-id="modal-Customer" ok-label="Save" max-width="500px">
+    <customer-form></customer-form>
+</modal>

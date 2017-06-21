@@ -22,6 +22,8 @@ namespace Reusable
         }
 
         protected virtual void loadNavigationProperties(params Entity[] entities) { }
+        protected virtual void addDbWheresWhenPaging(List<Expression<Func<Entity, bool>>> database_wheres) { }
+        protected virtual IQueryable<Entity> applyOrderByWhenPaging(IQueryable<Entity> recordset) { return recordset; }
 
         protected static EntityState GetEntityState(EF_EntityState state)
         {
@@ -108,9 +110,12 @@ namespace Reusable
             {
                 repository.byUserId = loggedUser.UserID;
 
+                var database_wheresList = database_wheres.ToList();
+                addDbWheresWhenPaging(database_wheresList);
+
                 #region Apply Database Filtering
 
-                entities = repository.GetList(orderby, database_wheres);
+                entities = repository.GetList(orderby, database_wheresList.ToArray());
                 loadNavigationProperties(entities.ToArray());
                 #endregion
 
@@ -127,32 +132,58 @@ namespace Reusable
 
                 #endregion
 
+                resultset = applyOrderByWhenPaging(resultset);
+
                 filterResponse.total_items = resultset.Count();
+
 
                 #region Apply General Search Filter
 
+                List<Entity> filteredResultSet = new List<Entity>();
                 if (!string.IsNullOrWhiteSpace(filterGeneral))
                 {
                     string[] arrFilterGeneral = filterGeneral.ToLower().Split(' ');
 
                     var searchableProps = typeof(Entity).GetProperties().Where(prop => new[] { "String" }.Contains(prop.PropertyType.Name));
 
-                    resultset = resultset.Where(e => searchableProps.Any(prop =>
-                                                        arrFilterGeneral.All(keyword =>
-                                                            ((string)prop.GetValue(e, null) ?? "").ToString().ToLower()
-                                                            .Contains(keyword))));
+                    foreach (var e in resultset)
+                    {
+                        foreach (var prop in searchableProps)
+                        {
+                            foreach (var keyword in arrFilterGeneral)
+                            {
+                                string a = (string)prop.GetValue(e, null);
+                                if (a.ToLower().Contains(keyword))
+                                {
+                                    filteredResultSet.Add(e);
+                                }
+                            }
+                        }
+                    }
+
+                    //DID NOT WORK ALL THE TIMES:
+                    //resultset = resultset.Where(e => searchableProps.Any(prop =>
+                    //                                    arrFilterGeneral.All(keyword =>
+                    //                                        ((string)prop.GetValue(e, null) ?? "").ToString().ToLower()
+                    //                                        .Contains(keyword))));
+                }
+                else
+                {
+                    filteredResultSet = resultset.ToList();
                 }
 
                 #endregion
 
-                filterResponse.total_filtered_items = resultset.Count();
+                filterResponse.total_filtered_items = filteredResultSet.Count();
 
                 #region Pagination
-
-                var result = resultset.Skip((page - 1) * perPage).Take(perPage).ToList();
+                if (perPage != 0)
+                {
+                    filteredResultSet = filteredResultSet.Skip((page - 1) * perPage).Take(perPage).ToList();
+                }
                 #endregion
 
-                return response.Success(result, filterResponse);
+                return response.Success(filteredResultSet, filterResponse);
             }
             catch (Exception e)
             {
