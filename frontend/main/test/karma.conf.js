@@ -36,6 +36,9 @@ module.exports = function(config) {
       'bower_components/microplugin/src/microplugin.js',
       'bower_components/selectize/dist/js/selectize.js',
       'bower_components/angular-file-upload/dist/angular-file-upload.min.js',
+      'bower_components/angular-aria/angular-aria.js',
+      'bower_components/angular-messages/angular-messages.js',
+      'bower_components/angular-material/angular-material.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

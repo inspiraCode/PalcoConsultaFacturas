@@ -35,20 +35,33 @@ namespace BusinessSpecificLogic.Migrations
             //
 
             context.cat_ProductLine.AddOrUpdate(
-                new cat_ProductLine() { ProductLineKey = 2, Value = "Switches" },
-                new cat_ProductLine() { ProductLineKey = 3, Value = "Solenoids" },
-                new cat_ProductLine() { ProductLineKey = 4, Value = "Wiring" },
-                new cat_ProductLine() { ProductLineKey = 5, Value = "Lighting" },
-                new cat_ProductLine() { ProductLineKey = 6, Value = "Sensors" },
-                new cat_ProductLine() { ProductLineKey = 7, Value = "Motors" },
-                new cat_ProductLine() { ProductLineKey = 8, Value = "Actuators" }
+                new cat_ProductLine() { ProductLineKey = 1, Value = "Switches" },
+                new cat_ProductLine() { ProductLineKey = 2, Value = "Solenoids" },
+                new cat_ProductLine() { ProductLineKey = 3, Value = "Wiring" },
+                new cat_ProductLine() { ProductLineKey = 4, Value = "Lighting" },
+                new cat_ProductLine() { ProductLineKey = 5, Value = "Sensors" },
+                new cat_ProductLine() { ProductLineKey = 6, Value = "Motors" },
+                new cat_ProductLine() { ProductLineKey = 7, Value = "Actuators" }
            );
 
             context.cat_ConcernType.AddOrUpdate(
-                new cat_ConcernType() { ConcernTypeKey = 2, Value = "Print Violation" },
-                new cat_ConcernType() { ConcernTypeKey = 3, Value = "Possible Print Violation" },
-                new cat_ConcernType() { ConcernTypeKey = 4, Value = "Dissatisfaction" }
+                new cat_ConcernType() { ConcernTypeKey = 1, Value = "Print Violation" },
+                new cat_ConcernType() { ConcernTypeKey = 2, Value = "Possible Print Violation" },
+                new cat_ConcernType() { ConcernTypeKey = 3, Value = "Dissatisfaction" }
             );
+
+
+            context.cat_Result.AddOrUpdate(
+                new cat_Result() { ResultKey = 1, Value = "Capsonic To Do 8D" },
+                new cat_Result() { ResultKey = 2, Value = "No validation but change" },
+                new cat_Result() { ResultKey = 3, Value = "No trouble found" }
+            );
+
+            context.cat_Status.AddOrUpdate(
+                new cat_Status() { StatusKey = 1, Value = "Opened" },
+                new cat_Status() { StatusKey = 2, Value = "Closed" }
+            );
+
 
             try
             {
