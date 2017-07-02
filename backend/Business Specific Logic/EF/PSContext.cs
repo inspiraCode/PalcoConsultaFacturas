@@ -6,10 +6,10 @@ namespace BusinessSpecificLogic.EF
     using System.Linq;
     using Reusable;
 
-    public partial class CQAContext : DbContext
+    public partial class PSContext : DbContext
     {
-        public CQAContext()
-            : base("name=CQAConn")
+        public PSContext()
+            : base("name=PSDBConn")
         {
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
@@ -17,14 +17,7 @@ namespace BusinessSpecificLogic.EF
             //Database.Log = Console.Write;
         }
 
-        public virtual DbSet<cat_ConcernType> cat_ConcernType { get; set; }
-        public virtual DbSet<cat_ProductLine> cat_ProductLine { get; set; }
-        public virtual DbSet<cat_Result> cat_Result { get; set; }
-        public virtual DbSet<cat_Status> cat_Status { get; set; }
-        public virtual DbSet<cat_Customer> cat_Customer { get; set; }
-        public virtual DbSet<CQAHeader> CQAHeaders { get; set; }
-        public virtual DbSet<CQALine> CQALines { get; set; }
-        public virtual DbSet<CQANumber> CQANumbers { get; set; }
+      
 
         #region From Reusable Modules
         public virtual DbSet<Track> Tracks { get; set; }
@@ -33,21 +26,6 @@ namespace BusinessSpecificLogic.EF
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CQAHeader>()
-                .Property(e => e.ConcernDescription)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<CQALine>()
-                .Property(e => e.OngoingActivities)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<CQANumber>()
-                .Property(e => e.GeneratedNumber)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<CQANumber>()
-                .Property(e => e.TaskDescriptionRevisionReason)
-                .IsUnicode(false);
             
             #region Reusable
             modelBuilder.Entity<User>()

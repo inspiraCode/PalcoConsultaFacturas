@@ -14,9 +14,7 @@ namespace ReusableWebAPI.App_Start
     using BusinessSpecificLogic;
     using ReusableWebAPI.Controllers;
     using Reusable;
-    using BusinessSpecificLogic.Logic;
-    using BusinessSpecificLogic.FS.Customer;
-    using BusinessSpecificLogic.FS;
+    
 
     public static class NinjectWebCommon 
     {
