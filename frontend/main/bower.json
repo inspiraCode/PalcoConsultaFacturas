@@ -23,5 +23,8 @@
   },
   "appPath": "app",
   "moduleName": "appApp",
-  "overrides": {}
+  "overrides": {},
+  "resolutions": {
+    "angular": "1.6.4"
+  }
 }

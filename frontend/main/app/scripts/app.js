@@ -46,28 +46,13 @@ angular.module('appApp', [
             controller: 'LoginCtrl',
             controllerAs: 'loginn' //cannot have same name as view            
         })
-        .when('/CQAList', {
-            templateUrl: 'views/cqalist.html',
-            controller: 'CqalistCtrl',
-            controllerAs: 'CQAList'
-        })
-        .when('/cqa', {
-            templateUrl: 'views/cqa.html',
-            controller: 'CqaCtrl',
-            controllerAs: 'cqa'
-        })
         .when('/emailAccount', {
-          templateUrl: 'views/emailaccount.html',
-          controller: 'EmailaccountCtrl',
-          controllerAs: 'emailAccount'
-        })
-        .when('/customers', {
-          templateUrl: 'views/customers.html',
-          controller: 'CustomersCtrl',
-          controllerAs: 'customers'
+            templateUrl: 'views/emailaccount.html',
+            controller: 'EmailaccountCtrl',
+            controllerAs: 'emailAccount'
         })
         .otherwise({
-            redirectTo: '/CQAList'
+            redirectTo: '/'
         });
 
     $activityIndicatorProvider.setActivityIndicatorStyle('CircledWhite');
