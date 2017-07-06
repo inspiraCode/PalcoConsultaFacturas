@@ -2,18 +2,18 @@
     <br>
     <br>
     <form class="form-login well" role="form">
-        <h1 style="text-align:center;">{{appName}}</h1>
-        <h2 class="form-login-heading">Login</h2>
+        <h1 style="text-align:center;">Inicio de Sesión</h1>
+        <h2 class="form-login-heading"><img  id="loginLogo" src="http://palco.mx/images/logo.png"></h2>
         <div class="form-group">
-            <label for="txtUserName">User Name</label>
-            <input type="text" id="txtUserName" class="form-control" placeholder="Username" data-ng-model="loginData.userName" required autofocus>
+            <label for="txtUserName">Nombre de Usuario</label>
+            <input type="text" id="txtUserName" class="form-control" placeholder="Nombre de Usuario" data-ng-model="loginData.userName" required autofocus>
         </div>
         <div class="form-group">
-            <label for="txtPassword">Password</label>
-            <input type="password" id="txtPassword" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
+            <label for="txtPassword">Contraseña</label>
+            <input type="password" id="txtPassword" class="form-control" placeholder="Contraseña" data-ng-model="loginData.password" required>
         </div>
         <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="login()" style="height: 70px;">
-            <span style="display: inline-block;height: 40px;vertical-align: middle;">Login</span><span ng-activity-indicator style="margin-left: 10px;display: inline-block;padding-top: 8px;height:40px;"></span>
+            <span style="display: inline-block;height: 40px;vertical-align: middle;">Inicio de Sesión</span><span ng-activity-indicator style="margin-left: 10px;display: inline-block;padding-top: 8px;height:40px;"></span>
         </button>
         <br>
         <br>

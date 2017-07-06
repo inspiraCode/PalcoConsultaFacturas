@@ -31,11 +31,11 @@ angular.module('appApp', [
     localStorageServiceProvider.setPrefix(appConfig.APP_NAME);
 
     $routeProvider
-    // .when('/', {
-    //     templateUrl: 'views/main.html',
-    //     controller: 'MainCtrl',
-    //     controllerAs: 'main'
-    // })
+        .when('/', {
+            templateUrl: 'views/main.html',
+            controller: 'MainCtrl',
+            controllerAs: 'main'
+        })
         .when('/about', {
             templateUrl: 'views/about.html',
             controller: 'AboutCtrl',
@@ -50,6 +50,11 @@ angular.module('appApp', [
             templateUrl: 'views/emailaccount.html',
             controller: 'EmailaccountCtrl',
             controllerAs: 'emailAccount'
+        })
+        .when('/factura-no-pagadas', {
+            templateUrl: 'views/factura-no-pagadas.html',
+            controller: 'FacturaNoPagadasCtrl',
+            controllerAs: 'facturaNoPagadas'
         })
         .otherwise({
             redirectTo: '/'

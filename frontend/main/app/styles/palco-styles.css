@@ -1,0 +1,107 @@
+/* Styles for palco */
+
+.navbar-default {
+    background-color: #93183a;
+    border-color: #93183a;
+}
+
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.well {
+    background-color: #333;
+    border-color: #333;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #f2cb42;
+}
+
+label {
+    color: #f2cb42
+}
+
+.btn-info {
+    color: black;
+    background-color: #f2cb42;
+    border-color: #f2cb42;
+}
+
+.btn-info:hover,
+.btn-info:focus,
+.info:active,
+.btn-info:active,
+.open>.dropdown-toggle.btn-info {
+    color: white;
+    background-color: transparent;
+    border-color: white;
+}
+
+.form-control {
+    color: white;
+    background-color: #2e2d2d;
+    border: 1px solid #2e2d2d;
+}
+
+.form-control:focus {
+    border-color: #f2cb42;
+}
+
+.btn-info.active.focus,
+.btn-info.active:focus,
+.btn-info.active:hover,
+.btn-info:active.focus,
+.btn-info:active:focus,
+.btn-info:active:hover,
+.open>.dropdown-toggle.btn-info.focus,
+.open>.dropdown-toggle.btn-info:focus,
+.open>.dropdown-toggle.btn-info:hover {
+    color: white;
+    background-color: transparent;
+    border-color: white;
+}
+
+.btn-info:active:focus,
+.btn-info:active:hover {
+    color: white;
+    background-color: transparent;
+    border-color: white;
+}
+
+#loginLogo {
+    width: 50%;
+    max-width: 150px;
+    margin-bottom: 15px;
+    margin-left: 60px;
+}
+
+.panel-default>.panel-heading {
+    color: white;
+    background-color: #2e2d2d;
+    border-color: #2e2d2d;
+}
